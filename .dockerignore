@@ -1,0 +1,7 @@
+.env
+.streamlit/
+.cache/
+__pycache__/
+*.py[cod]
+tests/
+*.zip

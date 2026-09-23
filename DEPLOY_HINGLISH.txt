@@ -1,0 +1,48 @@
+Expiry AI ko permanent website link par chalane ki simple guide
+=============================================================
+
+Abhi kya ready hai
+------------------
+Is folder mein dashboard ka editable source, Windows par local chalane ka launcher, aur website ke liye deployment setup hai. Existing dashboard ke candles, timeframe selectors, news, option chart, analysis aur paper-trade panels isi version mein rakhe hain.
+
+Free shareable website (Streamlit Community Cloud)
+---------------------------------------------------
+1. GitHub account ke saath Streamlit Community Cloud login karo.
+2. Is dashboard ke private GitHub repository ko Streamlit se connect karo.
+3. Create app mein repository `imtusharsharma001-sys/expiry-ai-dashboard`, branch `main`, main file `app.py` choose karo.
+4. Advanced settings ke Secrets box mein yeh TOML set karo, apna naya login password rakh kar:
+
+   DASHBOARD_PASSWORD = "apna-lamba-unique-password"
+   OPENAI_API_KEY = "nayi-api-key-yahan"
+
+   Agar AI istemaal nahi karna, `OPENAI_API_KEY` line chhod sakte ho. Kisi ko actual API key chat ya repository mein mat bhejna.
+
+Deploy ke baad Streamlit tumhe `https://...streamlit.app` link dega. Link phone aur computer par khulega. Dashboard password sirf apne intended viewers ko do.
+
+Paid VPS par chalane ke liye neeche ka Docker setup alternate hai. Uske liye always-on Linux VPS, domain, DNS aur ports 80/443 chahiye.
+
+Secret/API key set karna
+------------------------
+1. Server par is folder ki files copy karo.
+2. `.env.example` ki copy bana kar uska naam `.env` rakho.
+3. `.env` mein `DOMAIN_NAME` ko apne domain se badlo.
+4. `DASHBOARD_PASSWORD` ko lamba, unique password do.
+5. `OPENAI_API_KEY` mein apni fresh API key server par set karo. Key ko chat, screenshots, ya public ZIP mein mat daalo. Pehle chat mein bheji hui key ko OpenAI Platform par revoke karke nayi key use karo.
+6. Server ke is folder mein `docker compose up -d --build` chalao.
+7. `https://tumhara-domain` kholo aur dashboard password enter karo. Share karte waqt link aur password sirf intended logon ko do.
+
+Har roz use karne ke liye laptop par ZIP chalaane ki zaroorat nahi hogi; VPS app ko online rakhega. Browser ko `localhost` link ki zaroorat nahi padegi.
+
+Baad mein changes kaise karwane hain
+----------------------------------
+Is poore source folder ya ZIP ko sambhal kar rakho. Baad mein isi Codex task mein seedha likho, jaise “prediction chart ka rang badlo” ya “news filter add karo”. Main isi source par change karke updated bundle aur server update steps dunga. Agar task mil na raha ho to source ZIP attach karke change likh dena.
+
+Updated version server par daalne ke liye nayi source files server folder mein replace karke `docker compose up -d --build` chalao. Pehle `.env` ka backup lo aur use kabhi ZIP/share mein include mat karo.
+
+Abhi kya pending hai
+--------------------
+Streamlit Community Cloud par account connected hai, par deploy se pehle private repository mein source upload aur deploy secrets set karne hain. VPS/domain ki zaroorat nahi hai agar Streamlit Community Cloud use kar rahe ho.
+
+Data aur risk note
+------------------
+Dashboard paper analysis hai; ye real orders place nahi karta aur koi hit-rate/profit guarantee nahi deta. Optional option-chain/broker inputs manually upload hote hain. Live licensed market feed alag provider/account maang sakti hai.
